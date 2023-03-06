@@ -1,49 +1,46 @@
 public class Cube { 
-    static void show(String[][] Cube){
-        for(int i = 0; i<3; i++){
+    static void show(String[][][] Cube) {
+        for(int i = 0; i<6; i++){
             for(int j = 0; j<3; j++){
-                System.out.print(Face[i][j]);
+                for(int k = 0; k<3; k++){
+                    System.out.print(Cube[i][j][k]);
+                }
+                System.out.println();
             }
             System.out.println();
         }
     }
 
-    static String[][] Face = {
-        {"0","1","2"},
-        {"3","4","5"},
-        {"6","7","8"}
-    };
-
     static String[][][] Cube = {
         {
-            {"r","r","r"},
-            {"r","r","r"},
-            {"r","r","r"}
+            {"1r","2r","3r"},
+            {"4r","5r","6r"},
+            {"7r","8r","9r"}
         },
         {
-            {"b","b","b"},
-            {"b","b","b"},
-            {"b","b","b"}
+            {"1b","2b","3b"},
+            {"4b","5b","6b"},
+            {"7b","8b","9b"}
         },
         {
-            {"o","o","o"},
-            {"o","o","o"},
-            {"o","o","o"}
+            {"1o","2o","3o"},
+            {"4o","5o","6o"},
+            {"7o","8o","9o"}
         },
         {
-            {"g","g","g"},
-            {"g","g","g"},
-            {"g","g","g"}
+            {"1g","2g","3g"},
+            {"4g","5g","6g"},
+            {"7g","8g","9g"}
         },
         {
-            {"y","y","y"},
-            {"y","y","y"},
-            {"y","y","y"}
+            {"1y","2y","3y"},
+            {"4y","5y","6y"},
+            {"7y","8y","9y"}
         },
         {
-            {"w","w","w"},
-            {"w","w","w"},
-            {"w","w","w"}
+            {"1w","2w","3w"},
+            {"4w","5w","6w"},
+            {"7w","8w","9w"}
         },
     };
 
@@ -97,56 +94,38 @@ public class Cube {
             default:
                 //Code Block 
         }
-    };
+    }
 
-    static void rotateFace(String[][] Face, boolean clockwise, boolean display){
-        String[][] tempFace = new String[3][3];
+    static void rotateFace(String[][][] Cube, boolean clockwise, boolean display, String face){
+        String[][][] tempCube = new String[6][3][3];
 
-        for(int i = 0; i<3; i++){
+        for(int i = 0; i<6; i++){
             for(int j = 0; j<3; j++){
-                tempFace[i][j] = Face[i][j];
+                for(int k = 0; k<3; k++){
+                tempCube[i][j][k] = Cube[i][j][k];
             }
         }
 
 
         if (clockwise) {
-            /* hard-coding the clockwise rotation
-            Face[0][0] = tempFace[2][0];
-            Face[0][1] = tempFace[1][0];
-            Face[0][2] = tempFace[0][0];
-            Face[1][0] = tempFace[2][1];
-            Face[1][1] = tempFace[1][1];
-            Face[1][2] = tempFace[0][1];
-            Face[2][0] = tempFace[2][2];
-            Face[2][1] = tempFace[1][2];
-            Face[2][2] = tempFace[0][2];*/
-            
-            // loop for rotation
+            // loop for rotation of the face
             int k = 2;
             for (int i = 0; i < 3; i++) {
                 for (int j = 0; j < 3; j++) {
-                    Face[i][j] = tempFace[k][i];
+                    Cube[0][i][j] = tempCube[0][k][i];
                     k--;
                 }
                 k = 2;
             }
-        } else {
-            /* hard-coding the counter-clockwise rotation
-            Face[0][0] = tempFace[0][2];
-            Face[0][1] = tempFace[1][2];
-            Face[0][2] = tempFace[2][2];
-            Face[1][0] = tempFace[0][1];
-            Face[1][1] = tempFace[1][1];
-            Face[1][2] = tempFace[2][1];
-            Face[2][0] = tempFace[0][0];
-            Face[2][1] = tempFace[1][0];
-            Face[2][2] = tempFace[2][0];*/
 
+            // rotating other faces accordingly
+
+        } else {
             // loop for rotation
             int k = 2;
             for (int i = 0; i < 3; i++) {
                 for (int j = 0; j < 3; j++) {
-                    Face[i][j] = tempFace[j][k];
+                    Cube[0][i][j] = tempCube[0][j][k];
                 }
                 k--;
             }
@@ -154,24 +133,18 @@ public class Cube {
             
         // displaying the cube
         if (display == true) {
-            for (int i=0; i<3; i++) {
-                for (int j=0; j<3; j++) {
-                    System.out.print(Face[i][j]);
-                }
-                System.out.println();
-            }
+            show(Cube);
         }
-    }
+    };
 
     public static void main(String[] args){
-        show(Face);
+        show(Cube);
         System.out.println();
         rotateFace(Face, false, true);
         System.out.println();
 
-        show(Face);
+       // show(Face);
 
-        move(Cube, "u", 0);
-
+        //move(Cube, "u", 0);
     }
 }
