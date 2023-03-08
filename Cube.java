@@ -1,9 +1,12 @@
-public class Cube { 
-    static void show(String[][][] Cube) {
-        for(int i = 0; i<6; i++){
-            for(int j = 0; j<3; j++){
-                for(int k = 0; k<3; k++){
-                    System.out.print(Cube[i][j][k]);
+package com.example.project;
+
+public class Cube{ 
+
+    static void show(String[][][] Cube){
+        for (int k = 0; k<6; k++) {
+            for(int i = 0; i<3; i++){
+                for(int j = 0; j<3; j++){
+                    System.out.print(Cube[k][i][j]);
                 }
                 System.out.println();
             }
@@ -13,36 +16,286 @@ public class Cube {
 
     static String[][][] Cube = {
         {
-            {"1r","2r","3r"},
-            {"4r","5r","6r"},
-            {"7r","8r","9r"}
+            {"0r","1r","2r"},
+            {"3r","4r","5r"},
+            {"6r","7r","8r"}
         },
         {
-            {"1b","2b","3b"},
-            {"4b","5b","6b"},
-            {"7b","8b","9b"}
+            {"0b","1b","2b"},
+            {"3b","4b","5b"},
+            {"6b","7b","8b"}
         },
         {
-            {"1o","2o","3o"},
-            {"4o","5o","6o"},
-            {"7o","8o","9o"}
+            {"0o","1o","2o"},
+            {"3o","4o","5o"},
+            {"6o","7o","8o"}
         },
         {
-            {"1g","2g","3g"},
-            {"4g","5g","6g"},
-            {"7g","8g","9g"}
+            {"0g","1g","2g"},
+            {"3g","4g","5g"},
+            {"6g","7g","8g"}
         },
         {
-            {"1y","2y","3y"},
-            {"4y","5y","6y"},
-            {"7y","8y","9y"}
+            {"0w","1w","2w"},
+            {"3w","4w","5w"},
+            {"6w","7w","8w"}
         },
         {
-            {"1w","2w","3w"},
-            {"4w","5w","6w"},
-            {"7w","8w","9w"}
+            {"0y","1y","2y"},
+            {"3y","4y","5y"},
+            {"6y","7y","8y"}
+            
         },
     };
+    
+    static void move(String[][][] Cube, String input){
+        String[][][] tempCube = new String[6][3][3];
+
+        // copying the cube onto a temporary variable
+        for(int i=0; i<3;i++) {
+            for(int j=0; j<3;j++) {
+                for(int k=0; k<3;k++) {
+                    tempCube[i][j][k] = Cube[i][j][k];
+                }
+            }
+        }
+        //
+        switch(input){
+            case "u":
+                // rotating the sides and then the face
+                Cube[0][0][0] = tempCube[1][0][0];
+                Cube[0][0][1] = tempCube[1][0][1];
+                Cube[0][0][2] = tempCube[1][0][2];
+
+                Cube[1][0][1] = tempCube[2][0][0]
+                Cube[1][0][2] = tempCube[2][0][1]
+                Cube[1][0][0] = tempCube[2][0][2]
+
+                Cube[2][0][1] = tempCube[3][0][0]
+                Cube[2][0][2] = tempCube[3][0][1]
+                Cube[2][0][0] = tempCube[3][0][2]
+
+                Cube[3][0][1] = tempCube[0][0][0]
+                Cube[3][0][2] = tempCube[0][0][1]
+                Cube[3][0][0] = tempCube[0][0][2]
+
+                rotateFace(Cube, true, "white")
+                break;
+            case "d":
+                Cube[0][2][0] = tempCube[1][2][0];
+                Cube[0][2][1] = tempCube[1][2][1];
+                Cube[0][2][2] = tempCube[1][2][2];
+
+                Cube[1][2][1] = tempCube[2][2][0]
+                Cube[1][2][2] = tempCube[2][2][1]
+                Cube[1][2][0] = tempCube[2][2][2]
+
+                Cube[2][2][1] = tempCube[3][2][0]
+                Cube[2][2][2] = tempCube[3][2][1]
+                Cube[2][2][0] = tempCube[3][2][2]
+
+                Cube[3][2][1] = tempCube[0][2][0]
+                Cube[3][2][2] = tempCube[0][2][1]
+                Cube[3][2][0] = tempCube[0][2][2]
+
+                rotateFace(Cube, true, "yellow")
+                break;
+            case "r":
+                Cube[0][0][2] = tempCube[5][0][2]
+                Cube[0][1][2] = tempCube[5][1][2]
+                Cube[0][2][2] = tempCube[5][2][2]
+
+                Cube[5][0][2] = tempCube[2][0][2]
+                Cube[5][1][2] = tempCube[2][1][2]
+                Cube[5][2][2] = tempCube[2][2][2]
+
+                Cube[2][0][2] = tempCube[4][0][2]
+                Cube[2][1][2] = tempCube[4][1][2]
+                Cube[2][2][2] = tempCube[4][2][2]
+
+                Cube[4][0][2] = tempCube[0][0][2]
+                Cube[4][1][2] = tempCube[0][1][2]
+                Cube[4][2][2] = tempCube[0][2][2]
+
+                rotateFace(Cube, true, "blue")
+                break;
+            case "l":
+                Cube[0][0][0] = tempCube[4][0][0]
+                Cube[0][1][0] = tempCube[4][1][0]
+                Cube[0][2][0] = tempCube[4][2][0]
+
+                Cube[4][0][0] = tempCube[2][0][0]
+                Cube[4][1][0] = tempCube[2][1][0]
+                Cube[4][2][0] = tempCube[2][2][0]
+
+                Cube[2][0][0] = tempCube[5][0][0]
+                Cube[2][1][0] = tempCube[5][1][0]
+                Cube[2][2][0] = tempCube[5][2][0]
+
+                Cube[5][0][0] = tempCube[0][0][0]
+                Cube[5][1][0] = tempCube[0][1][0]
+                Cube[5][2][0] = tempCube[0][2][0]
+
+                rotateFace(Cube, true, "green")
+                break;
+            case "f":
+                rotateFace(Cube, true, "red")
+                break;
+            case "b":
+                Cube[1][0][2] = tempCube[5][0][2]
+                Cube[1][1][2] = tempCube[5][1][2]
+                Cube[1][2][2] = tempCube[5][2][2]
+
+                Cube[5][0][2] = tempCube[3][0][2]
+                Cube[5][1][2] = tempCube[3][1][2]
+                Cube[5][2][2] = tempCube[3][2][2]
+
+                Cube[3][0][2] = tempCube[4][0][2]
+                Cube[3][1][2] = tempCube[4][1][2]
+                Cube[3][2][2] = tempCube[4][2][2]
+
+                Cube[4][0][2] = tempCube[1][0][2]
+                Cube[4][1][2] = tempCube[1][1][2]
+                Cube[4][2][2] = tempCube[1][2][2]
+
+                rotateFace(Cube, true, "orange")
+                break;
+            case "u'":
+                Cube[0][0][0] = tempCube[3][0][0];
+                Cube[0][0][1] = tempCube[3][0][1];
+                Cube[0][0][2] = tempCube[3][0][2];
+
+                Cube[3][0][1] = tempCube[2][0][0]
+                Cube[3][0][2] = tempCube[2][0][1]
+                Cube[3][0][0] = tempCube[2][0][2]
+
+                Cube[2][0][1] = tempCube[1][0][0]
+                Cube[2][0][2] = tempCube[1][0][1]
+                Cube[2][0][0] = tempCube[1][0][2]
+
+                Cube[1][0][1] = tempCube[0][0][0]
+                Cube[1][0][2] = tempCube[0][0][1]
+                Cube[1][0][0] = tempCube[0][0][2]
+
+                rotateFace(Cube, false, "white")
+                break;
+            case "d'":
+                Cube[0][2][0] = tempCube[3][2][0];
+                Cube[0][2][1] = tempCube[3][2][1];
+                Cube[0][2][2] = tempCube[3][2][2];
+
+                Cube[3][2][1] = tempCube[2][2][0]
+                Cube[3][2][2] = tempCube[2][2][1]
+                Cube[3][2][0] = tempCube[2][2][2]
+
+                Cube[2][2][1] = tempCube[1][2][0]
+                Cube[2][2][2] = tempCube[1][2][1]
+                Cube[2][2][0] = tempCube[1][2][2]
+
+                Cube[1][2][1] = tempCube[0][2][0]
+                Cube[1][2][2] = tempCube[0][2][1]
+                Cube[1][2][0] = tempCube[0][2][2]
+
+                rotateFace(Cube, false, "yellow")
+                break;
+            case "r'":
+                Cube[0][0][2] = tempCube[4][0][2]
+                Cube[0][1][2] = tempCube[4][1][2]
+                Cube[0][2][2] = tempCube[4][2][2]
+
+                Cube[4][0][2] = tempCube[2][0][2]
+                Cube[4][1][2] = tempCube[2][1][2]
+                Cube[4][2][2] = tempCube[2][2][2]
+
+                Cube[2][0][2] = tempCube[5][0][2]
+                Cube[2][1][2] = tempCube[5][1][2]
+                Cube[2][2][2] = tempCube[5][2][2]
+
+                Cube[5][0][2] = tempCube[0][0][2]
+                Cube[5][1][2] = tempCube[0][1][2]
+                Cube[5][2][2] = tempCube[0][2][2]
+
+                rotateFace(Cube, false, "blue")
+                break;
+            case "l'":
+                Cube[0][0][0] = tempCube[5][0][0]
+                Cube[0][1][0] = tempCube[5][1][0]
+                Cube[0][2][0] = tempCube[5][2][0]
+
+                Cube[5][0][0] = tempCube[2][0][0]
+                Cube[5][1][0] = tempCube[2][1][0]
+                Cube[5][2][0] = tempCube[2][2][0]
+
+                Cube[2][0][0] = tempCube[4][0][0]
+                Cube[2][1][0] = tempCube[4][1][0]
+                Cube[2][2][0] = tempCube[4][2][0]
+
+                Cube[4][0][0] = tempCube[0][0][0]
+                Cube[4][1][0] = tempCube[0][1][0]
+                Cube[4][2][0] = tempCube[0][2][0]
+
+                rotateFace(Cube, false, "green")
+                break;
+            case "f'":
+                rotateFace(Cube, false, "red")
+                break;
+            case "b'":
+                Cube[1][0][2] = tempCube[4][0][2]
+                Cube[1][1][2] = tempCube[4][1][2]
+                Cube[1][2][2] = tempCube[4][2][2]
+
+                Cube[4][0][2] = tempCube[3][0][2]
+                Cube[4][1][2] = tempCube[3][1][2]
+                Cube[4][2][2] = tempCube[3][2][2]
+
+                Cube[3][0][2] = tempCube[5][0][2]
+                Cube[3][1][2] = tempCube[5][1][2]
+                Cube[3][2][2] = tempCube[5][2][2]
+
+                Cube[5][0][2] = tempCube[1][0][2]
+                Cube[5][1][2] = tempCube[1][1][2]
+                Cube[5][2][2] = tempCube[1][2][2]
+
+                rotateFace(Cube, false, "orange")
+                break;
+            default:
+                //Code Block 
+                System.out.println("Unknown input!")
+        }
+    };
+
+    static void rotateFace(String[][][] Cube, boolean clockwise, String color){
+        String[][][] tempCube = new String[6][3][3];
+        boolean rotateAdjacentSides = false;
+        if (color == "red") {
+            // rotate sides manually only for color red, others are done before
+            rotateAdjacentSides = true
+        }
+        int color_num = 0;
+        if (color == "yellow") {
+            color_num = 5
+        } else if (color == "white") {
+            color_num = 4
+        } else if (color == "green") {
+            color_num = 3
+        } else if (color == "orange") {
+            color_num = 2
+        } else if (color == "blue") {
+            color_num = 1
+        } else {
+            color_num = 0
+        }
+
+        // temporary variable creation
+        for(int i = 0; i<3; i++){
+            for(int j = 0; j<3; j++){
+                for(int k = 0; k<3; k++){
+                    tempCube[i][j][k] = Cube[i][j][k];
+                }
+            }
+        }
+
+
 
     // the 6 sides of the cube:
     /*
@@ -50,101 +303,63 @@ public class Cube {
      * 1 - b
      * 2 - o
      * 3 - g
-     * 4 - y
-     * 5 - w
+     * 4 - w
+     * 5 - y
+     *   w
+     * g r b o
+     *   y
      */
-    
-    static void move(String[][][] Cube, String input, int face){
-        String[][][] tempCube = new String[6][3][3];
-
-        for(int i=0; i<3;i++)
-            for(int j=0; j<3;j++)
-                for(int k=0; k<3;k++)
-                    tempCube[i][j][k] = Cube[i][j][k];
-        
-        switch(input){
-            case "u":
-                Cube[face][0][0] = tempCube[face+1][0][0];
-                Cube[face][0][1] = tempCube[1][0][1];
-                Cube[face][0][2] = tempCube[1][0][2];
-                break;
-            case "d":
-
-            case "r":
-
-            case "l":
-
-            case "f":
-
-            case "b":
-
-            case "u'":
-            
-            case "d'":
-
-            case "r'":
-
-            case "l'":
-
-            case "f'":
-
-            case "b'":
-
-
-            default:
-                //Code Block 
-        }
-    }
-
-    static void rotateFace(String[][][] Cube, boolean clockwise, boolean display, String face){
-        String[][][] tempCube = new String[6][3][3];
-
-        for(int i = 0; i<6; i++){
-            for(int j = 0; j<3; j++){
-                for(int k = 0; k<3; k++){
-                tempCube[i][j][k] = Cube[i][j][k];
-            }
-        }
-
 
         if (clockwise) {
-            // loop for rotation of the face
+            // rotating the face based on inputted color
             int k = 2;
             for (int i = 0; i < 3; i++) {
                 for (int j = 0; j < 3; j++) {
-                    Cube[0][i][j] = tempCube[0][k][i];
+                    Cube[color_num][i][j] = tempCube[color_num][k][i];
                     k--;
                 }
                 k = 2;
             }
 
-            // rotating other faces accordingly
+            // rotating the adjacent sides
+            if (rotateAdjacentSides == true) {
+                Cube[5][2][0] = tempCube[3][0][2];
+                Cube[5][2][1] = tempCube[3][1][2];
+                Cube[5][2][2] = tempCube[3][2][2];
+
+                Cube[3][0][2] = tempCube[4][0][0];
+                Cube[3][1][2] = tempCube[4][0][1];
+                Cube[3][2][2] = tempCube[4][0][2];
+
+                Cube[4][0][0] = tempCube[1][0][0];
+                Cube[4][0][1] = tempCube[1][1][0];
+                Cube[4][0][2] = tempCube[1][2][0];
+
+                Cube[1][0][0] = tempCube[5][2][0];
+                Cube[1][1][0] = tempCube[5][2][1];
+                Cube[1][2][0] = tempCube[5][2][2];
+            }
 
         } else {
-            // loop for rotation
+            // rotating the face
             int k = 2;
             for (int i = 0; i < 3; i++) {
                 for (int j = 0; j < 3; j++) {
-                    Cube[0][i][j] = tempCube[0][j][k];
+                    Cube[color_num][i][j] = tempCube[color_num][j][k];
                 }
                 k--;
             }
         }
-            
-        // displaying the cube
-        if (display == true) {
-            show(Cube);
-        }
-    };
+    }
 
     public static void main(String[] args){
+        // loop over input
+        int i = 0;
+        while (i < args.length) {
+            move(Cube, args[i]);
+            i++;
+        }
+        // show the Cube
         show(Cube);
-        System.out.println();
-        rotateFace(Face, false, true);
-        System.out.println();
-
-       // show(Face);
-
-        //move(Cube, "u", 0);
     }
 }
