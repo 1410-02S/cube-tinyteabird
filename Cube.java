@@ -1,5 +1,7 @@
 package com.example.project;
 
+//Looks good, Fairly complete and working well enough I think. could use some more help for users.
+
 public class Cube{ 
 
     static void show(String[][][] Cube){
